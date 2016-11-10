@@ -251,7 +251,6 @@ class Cart
             $price = $parser->parse($price, $this->currency->getCode());
 
             $item->price($price);
-
         } else {
             // If a currency is not set, store the item price as a float
             $item->price(floatval($price));
@@ -302,7 +301,6 @@ class Cart
 
             // Update every $currentItem property with the $item ones
             foreach ($itemProperties as $property) {
-
                 $value = $item->{$property}();
 
                 if ( ! is_null($value) && $value !== '') {
