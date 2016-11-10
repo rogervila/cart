@@ -3,3 +3,11 @@ preset: psr2
 finder:
   exclude:
     - "tests"
+
+enabled:
+  - no_unneeded_control_parentheses
+
+disabled:
+  - no_spaces_inside_parenthesis
+  - unix_line_endings
+  - short_array_syntax
