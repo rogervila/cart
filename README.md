@@ -1,5 +1,10 @@
 # Cart
 
+[![Build Status](https://travis-ci.org/rogervila/cart.svg?branch=master)](https://travis-ci.org/rogervila/cart)
+[![Code Climate](https://codeclimate.com/github/rogervila/cart/badges/gpa.svg)](https://codeclimate.com/github/rogervila/cart)
+[![Test Coverage](https://codeclimate.com/github/rogervila/cart/badges/coverage.svg)](https://codeclimate.com/github/rogervila/cart/coverage)
+[![Issue Count](https://codeclimate.com/github/rogervila/cart/badges/issue_count.svg)](https://codeclimate.com/github/rogervila/cart)
+
 Cart is based on sessions, and follows the Fowler's Money pattern.
 
 **Main features**.
@@ -69,7 +74,7 @@ use Cart\Item;
 $item = new Item('mandatoryUniqueId');
 ```
 
-## add Item data
+### add Item data
 
 Instead of passing only the ID, an array with data can be passed.
 
@@ -82,7 +87,7 @@ $item = new Item([
 ]);
 ```
 
-## add Item custom data
+### add Item custom data
 
 In order to add custom fields, a `fields()` method is provided
 
