@@ -429,7 +429,7 @@ class Cart
     {
         $result = new Money(0, $this->currency);
 
-        foreach ($this->items as $key => $item) {
+        foreach ($this->items as $item) {
             $result = $result->add($item->price());
         }
 
@@ -443,7 +443,7 @@ class Cart
     {
         $result = 0.0;
 
-        foreach ($this->items as $key => $item) {
+        foreach ($this->items as $item) {
             $result += $item->price();
         }
 
