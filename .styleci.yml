@@ -10,4 +10,3 @@ enabled:
 disabled:
   - no_spaces_inside_parenthesis
   - unix_line_endings
-  - short_array_syntax
