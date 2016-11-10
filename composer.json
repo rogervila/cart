@@ -1,0 +1,40 @@
+{
+  "name": "rogervila/cart",
+  "description": "PHP Shopping cart using Fowler's Money pattern",
+  "keywords": [
+    "ecommerce",
+    "shopping",
+    "cart",
+    "money"
+  ],
+  "authors": [
+    {
+      "name": "Roger Vilà",
+      "email": "rogervila@me.com"
+    }
+  ],
+  "version": "0.1.0",
+  "homepage": "https://github.com/rogervila/cart",
+  "type": "library",
+  "license": "MIT",
+  "require": {
+    "php": "^5.5 || ^7.0",
+    "moneyphp/money": "^3.0",
+    "php-http/guzzle6-adapter": "^1.1",
+    "florianv/swap": "^3.0"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^5.6"
+  },
+  "autoload": {
+    "psr-4": {
+      "Cart\\": "src/"
+    }
+  },
+  "scripts": {
+    "test": [
+      "vendor/bin/phpunit"
+    ]
+  },
+  "minimum-stability": "stable"
+}
