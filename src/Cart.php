@@ -149,7 +149,7 @@ class Cart
             $this->setSession($value);
         }
 
-        return $this->getSession();
+        return $this->session;
     }
 
 
@@ -165,14 +165,6 @@ class Cart
         $this->session = $contract;
 
         return $this;
-    }
-
-    /**
-     * @return SessionContract
-     */
-    protected function getSession()
-    {
-        return $this->session;
     }
 
     // ITEMS
@@ -282,18 +274,10 @@ class Cart
     public function items($itemOrItems = null)
     {
         if (is_null($itemOrItems)) {
-            return $this->getItems();
+            return $this->items;
         }
 
         return $this->add($itemOrItems);
-    }
-
-    /**
-     * @return array
-     */
-    protected function getItems()
-    {
-        return $this->items;
     }
 
     /**
@@ -310,11 +294,11 @@ class Cart
      * Looks for the items that contain the same values as the $item
      *
      * @param Item $item
-     */
+     *//*
     public function search(Item $item)
     {
         // TODO
-    }
+    }*/
 
     /**
      * @param Item $item
@@ -405,7 +389,7 @@ class Cart
             $this->setCurrency($value);
         }
 
-        return $this->getCurrency();
+        return $this->currency;
     }
 
     /**
@@ -422,14 +406,6 @@ class Cart
         }
 
         return $this;
-    }
-
-    /**
-     * @return Currency
-     */
-    protected function getCurrency()
-    {
-        return $this->currency;
     }
 
     // RESULTS
@@ -474,8 +450,9 @@ class Cart
         return $result;
     }
 
+    /*
     public function total()
     {
         // TODO
-    }
+    }*/
 }
