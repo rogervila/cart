@@ -84,7 +84,6 @@ class Cart
         $cartFromSession = $this->session->get($id);
 
         if ($cartFromSession instanceof Cart) {
-
             $properties = $this->properties();
 
             foreach ($properties as $property) {
@@ -184,7 +183,6 @@ class Cart
         }
 
         if (is_array($arrayOrItem)) {
-
             foreach ($arrayOrItem as $item) {
                 if ($item instanceof Item) {
                     $this->setItem($item);
@@ -207,7 +205,6 @@ class Cart
     {
         // Check that there is no other item with the same ID
         if ( ! $this->has($item)) {
-
             // The item MUST have an ID
             if (is_null($item->id()) || $item->id() === '') {
                 throw new \Exception("An item without ID can't be added to the cart. The item: " . json_encode($item));
@@ -248,7 +245,6 @@ class Cart
 
         // If a currency is set, convert the price into a currency value
         if ( ! is_null($this->currency)) {
-
             $currencies = new ISOCurrencies();
             $parser     = new DecimalMoneyParser($currencies);
 
@@ -291,16 +287,6 @@ class Cart
     }
 
     /**
-     * Looks for the items that contain the same values as the $item
-     *
-     * @param Item $item
-     *//*
-    public function search(Item $item)
-    {
-        // TODO
-    }*/
-
-    /**
      * @param Item $item
      *
      * @return $this
@@ -311,7 +297,6 @@ class Cart
         $currentItem = $this->getItemById($item->id());
 
         if ($currentItem instanceof Item) {
-
             // returns property names as an array
             $itemProperties = $item->properties();
 
@@ -449,10 +434,4 @@ class Cart
 
         return $result;
     }
-
-    /*
-    public function total()
-    {
-        // TODO
-    }*/
 }
