@@ -143,7 +143,7 @@ class Item
     /**
      * @param null $value
      *
-     * @return string
+     * @return mixed
      */
     public function price($value = null)
     {
