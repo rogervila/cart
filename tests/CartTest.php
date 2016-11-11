@@ -3,8 +3,8 @@
 namespace Cart\Tests;
 
 use Cart\Cart;
-use Cart\Contracts\SessionContract;
 use Cart\Item;
+use Cart\Tests\Resources\Session;
 
 
 class CartTest extends \PHPUnit_Framework_TestCase
@@ -58,9 +58,9 @@ class CartTest extends \PHPUnit_Framework_TestCase
         // The default session class is set
         $this->assertInstanceOf('Cart\Session', $cart->session());
 
-        $cart->session(new TestingSession());
+        $cart->session(new Session());
 
-        $this->assertInstanceOf('Cart\Tests\TestingSession', $cart->session());
+        $this->assertInstanceOf('\Cart\Tests\Resources\Session', $cart->session());
     }
 
     /** @test */
@@ -195,29 +195,5 @@ class CartTest extends \PHPUnit_Framework_TestCase
         $retrievedItem = $cart->item($id);
 
         $this->assertEquals($item, $retrievedItem);
-    }
-}
-
-// Session class for changeSessionSystem() test
-class TestingSession implements SessionContract
-{
-    public function put($key, $value)
-    {
-    }
-
-    public function get($key)
-    {
-    }
-
-    public function has($key)
-    {
-    }
-
-    public function forget($key)
-    {
-    }
-
-    public function flush()
-    {
     }
 }
