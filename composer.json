@@ -31,6 +31,11 @@
       "Cart\\": "src/"
     }
   },
+  "autoload-dev": {
+    "psr-4": {
+      "Cart\\Tests\\": "tests/"
+    }
+  },
   "scripts": {
     "test": [
       "vendor/bin/phpunit"
