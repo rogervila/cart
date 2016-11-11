@@ -4,6 +4,7 @@
 [![Code Climate](https://codeclimate.com/github/rogervila/cart/badges/gpa.svg)](https://codeclimate.com/github/rogervila/cart)
 [![Test Coverage](https://codeclimate.com/github/rogervila/cart/badges/coverage.svg)](https://codeclimate.com/github/rogervila/cart/coverage)
 [![Issue Count](https://codeclimate.com/github/rogervila/cart/badges/issue_count.svg)](https://codeclimate.com/github/rogervila/cart)
+[![StyleCI](https://styleci.io/repos/73286250/shield)](https://styleci.io/repos/73286250)
 
 Cart is based on sessions, and follows the Fowler's Money pattern.
 
