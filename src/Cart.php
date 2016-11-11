@@ -3,10 +3,12 @@
 namespace Cart;
 
 use Cart\Contracts\SessionContract;
+use Cart\Helpers\Calculator;
+use Cart\Transformers\CartTransformer;
+use Cart\Transformers\ItemTransformer;
 use Money\Currencies\ISOCurrencies;
 use Money\Currency;
 use Money\Money;
-use Money\Parser\DecimalMoneyParser;
 
 /**
  * Class Cart
@@ -14,7 +16,7 @@ use Money\Parser\DecimalMoneyParser;
  */
 class Cart
 {
-    use Commons;
+    use Commons, Calculator, CartTransformer, ItemTransformer;
 
     // Default ID key for the Cart
     const DEFAULT_ID_KEY = '_defaultCartIdKey';
@@ -105,11 +107,7 @@ class Cart
      */
     protected function setId($id = null)
     {
-        if (is_null($id)) {
-            $this->id = $this->setDefaultID();
-        } else {
-            $this->id = $id;
-        }
+        $this->id = $this->handleId($id);
 
         // A new session row will be added with the new ID.
         $this->session->put($this->id, $this);
@@ -210,10 +208,13 @@ class Cart
                 throw new \Exception("An item without ID can't be added to the cart. The item: " . json_encode($item));
             }
 
-            // Parse its price and quantity
-            $item = $this->parseItem($item);
+            // At least 1 quantity
+            $item = $this->atLeastOneQuantity($item);
 
-            // Add it
+            // Price with or without currency
+            $item = $this->parsePrice($item, $this->currency);
+
+            // Add it to the Cart
             array_push($this->items, $item);
 
             // Append the full object to the session
@@ -221,42 +222,6 @@ class Cart
         }
 
         return $this;
-    }
-
-    /**
-     * @param Item $item
-     *
-     * @return Item
-     */
-    protected function parseItem(Item $item)
-    {
-        // Set at least one item on the cart
-        if (is_null($item->quantity())) {
-            $item->quantity(1);
-        }
-
-        // Get the current item price
-        $price = $item->price();
-
-        // If price is not numeric, set it to 0
-        if ( ! is_numeric($price)) {
-            $price = '0';
-        }
-
-        // If a currency is set, convert the price into a currency value
-        if ( ! is_null($this->currency)) {
-            $currencies = new ISOCurrencies();
-            $parser     = new DecimalMoneyParser($currencies);
-
-            $price = $parser->parse($price, $this->currency->getCode());
-
-            $item->price($price);
-        } else {
-            // If a currency is not set, store the item price as a float
-            $item->price(floatval($price));
-        }
-
-        return $item;
     }
 
     /**
@@ -399,37 +364,9 @@ class Cart
     public function subtotal()
     {
         if ( ! is_null($this->currency)) {
-            return $this->calculateSubtotalWithCurrency();
+            return $this->calculateSubtotalWithCurrency($this->items, $this->currency);
         }
 
-        return $this->calculateSubtotalWithoutCurrency();
-    }
-
-    /**
-     * @return Money
-     */
-    protected function calculateSubtotalWithCurrency()
-    {
-        $result = new Money(0, $this->currency);
-
-        foreach ($this->items as $item) {
-            $result = $result->add($item->price());
-        }
-
-        return $result;
-    }
-
-    /**
-     * @return float
-     */
-    protected function calculateSubtotalWithoutCurrency()
-    {
-        $result = 0.0;
-
-        foreach ($this->items as $item) {
-            $result += $item->price();
-        }
-
-        return $result;
+        return $this->calculateSubtotalWithoutCurrency($this->items);
     }
 }
