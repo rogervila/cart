@@ -53,7 +53,7 @@ class Session implements SessionContract
      */
     public function get($key)
     {
-        if (isset($_SESSION[$this->name][$key])) {
+        if ($this->has($key)) {
             return unserialize($_SESSION[$this->name][$key]);
         }
 
@@ -77,9 +77,13 @@ class Session implements SessionContract
      */
     public function forget($key)
     {
-        unset($_SESSION[$this->name][$key]);
+        if ($this->has($key)) {
+            unset($_SESSION[$this->name][$key]);
 
-        return true;
+            return true;
+        }
+
+        return false;
     }
 
     /**
