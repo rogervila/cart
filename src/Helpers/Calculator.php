@@ -3,6 +3,7 @@
 namespace Cart\Helpers;
 
 use Cart\Item;
+use Money\Currency;
 use Money\Money;
 
 trait Calculator
@@ -13,7 +14,7 @@ trait Calculator
      *
      * @return Money
      */
-    protected function calculateSubtotalWithCurrency($items, $currency)
+    protected function calculateSubtotalWithCurrency($items, Currency $currency)
     {
         $result = new Money(0, $currency);
 
