@@ -28,9 +28,8 @@ install:
   - IF %PHP%==1 echo extension=php_fileinfo.dll >> php.ini
   - IF %PHP%==1 echo @php %%~dp0composer.phar %%* > composer.bat
   - appveyor DownloadFile https://getcomposer.org/composer.phar
-  - cd c:\projects\cart
+  - ls
   - composer install --prefer-dist --no-progress
 
 test_script:
-  - cd c:\projects\cart
-  - vendor/bin/phpunit --colors=always
+  - vendor/bin/phpunit
