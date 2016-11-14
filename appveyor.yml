@@ -31,6 +31,4 @@ install:
   - appveyor DownloadFile https://getcomposer.org/composer.phar
   - ls
   - composer.phar install --prefer-dist
-
-test_script:
   - cd vendor/bin/ && ls && phpunit
