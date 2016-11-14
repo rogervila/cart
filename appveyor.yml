@@ -33,4 +33,4 @@ install:
   - composer.phar install --prefer-dist --no-progress
 
 test_script:
-  - %APPVEYOR_BUILD_FOLDER%/vendor/bin/phpunit
+  - vendor/bin/phpunit
