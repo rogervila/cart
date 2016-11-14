@@ -29,5 +29,5 @@ install:
   - cd %APPVEYOR_BUILD_FOLDER%
   - appveyor DownloadFile https://getcomposer.org/composer.phar
   - ls
-  - composer.phar install --prefer-dist
+  - php composer.phar install --prefer-dist
   - cd vendor/bin/ && ls && phpunit
