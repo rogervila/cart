@@ -231,7 +231,7 @@ class Item
             return $this;
         }
 
-        throw new \Exception('Item->setFields() expects an array. Argument given: ' . json_encode($array));
+        throw new \Exception('Item->setFields() expects an array. Argument given: ' . json_encode($fields));
     }
 
     /**
