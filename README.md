@@ -1,10 +1,11 @@
 # Cart
 
-[![Build Status](https://travis-ci.org/rogervila/cart.svg?branch=master)](https://travis-ci.org/rogervila/cart)
+[![Travis Build Status](https://travis-ci.org/rogervila/cart.svg?branch=master)](https://travis-ci.org/rogervila/cart)
 [![Code Climate](https://codeclimate.com/github/rogervila/cart/badges/gpa.svg)](https://codeclimate.com/github/rogervila/cart)
-[![Test Coverage](https://codeclimate.com/github/rogervila/cart/badges/coverage.svg)](https://codeclimate.com/github/rogervila/cart/coverage)
-[![Issue Count](https://codeclimate.com/github/rogervila/cart/badges/issue_count.svg)](https://codeclimate.com/github/rogervila/cart)
+[![Codeclimate Test Coverage](https://codeclimate.com/github/rogervila/cart/badges/coverage.svg)](https://codeclimate.com/github/rogervila/cart/coverage)
+[![Codeclimate Issue Count](https://codeclimate.com/github/rogervila/cart/badges/issue_count.svg)](https://codeclimate.com/github/rogervila/cart)
 [![StyleCI](https://styleci.io/repos/73286250/shield)](https://styleci.io/repos/73286250)
+[![Appveyor Build status](https://ci.appveyor.com/api/projects/status/xs0jrfxt0f1s3y0b/branch/master?svg=true)](https://ci.appveyor.com/project/roger-vila/cart/branch/master)
 
 Cart is based on sessions, and follows the Fowler's Money pattern.
 
