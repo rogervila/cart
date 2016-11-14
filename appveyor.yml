@@ -30,7 +30,7 @@ install:
   - cd %APPVEYOR_BUILD_FOLDER%
   - appveyor DownloadFile https://getcomposer.org/composer.phar
   - ls
-  - composer.phar install --prefer-dist --no-progress
+  - composer.phar install --prefer-dist
 
 test_script:
-  - vendor/bin/phpunit
+  - %APPVEYOR_BUILD_FOLDER%vendor/bin/phpunit
