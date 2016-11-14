@@ -38,7 +38,7 @@ class Item
     public function __construct($idOrArray)
     {
         if (is_array($idOrArray)) {
-            $this->parseFields($idOrArray);
+            $this->setFields($idOrArray);
         } else {
             $this->id = $idOrArray;
         }
@@ -196,20 +196,6 @@ class Item
     // FIELDS
 
     /**
-     * @param $fields
-     */
-    protected function parseFields($fields)
-    {
-        foreach ($fields as $key => $value) {
-            if (property_exists($this, $key)) {
-                $this->{$key}($value);
-            } else {
-                $this->fields[$key] = $value;
-            }
-        }
-    }
-
-    /**
      * @param null $value
      *
      * @return array
@@ -224,15 +210,23 @@ class Item
     }
 
     /**
-     * @param $array
+     * @param $fields
      *
      * @return $this
      * @throws \Exception
      */
-    protected function setFields($array)
+    protected function setFields($fields)
     {
-        if (is_array($array)) {
-            $this->fields = $array;
+        if (is_array($fields)) {
+
+            // Set attributes or custom fields
+            foreach ($fields as $key => $value) {
+                if (property_exists($this, $key)) {
+                    $this->{$key}($value);
+                } else {
+                    $this->fields[$key] = $value;
+                }
+            }
 
             return $this;
         }
