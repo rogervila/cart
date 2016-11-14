@@ -18,7 +18,7 @@ class CartTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('Cart\Cart', $cart);
 
         // Check Properties
-        foreach (['id', 'items'] as $property) {
+        foreach (['id', 'items', 'session', 'currency'] as $property) {
             $this->assertObjectHasAttribute($property, $cart);
         }
 
@@ -28,6 +28,12 @@ class CartTest extends \PHPUnit_Framework_TestCase
                 method_exists($cart, $method),
                 'Cart does not have method "' . $method . '"'
             );
+        }
+
+        // Check constants
+        foreach (['DEFAULT_ID_KEY'] as $constant) {
+            $cart = new \ReflectionClass(Cart::class);
+            $this->assertArrayHasKey($constant, $cart->getConstants());
         }
     }
 
