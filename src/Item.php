@@ -2,13 +2,15 @@
 
 namespace Cart;
 
+use Cart\Transformers\ItemTransformer;
+
 /**
  * Class Item
  * @package Cart
  */
 class Item
 {
-    use Commons;
+    use Commons, ItemTransformer;
 
     /**
      * @var string
@@ -38,10 +40,10 @@ class Item
     public function __construct($idOrArray)
     {
         if (is_array($idOrArray)) {
-            $this->setFields($idOrArray);
-        } else {
-            $this->id = $idOrArray;
+            return $this->setFields($idOrArray);
         }
+
+        return $this->id = $idOrArray;
     }
 
     // ID
@@ -120,13 +122,13 @@ class Item
      */
     protected function setQuantity($quantity)
     {
-        if (is_int($quantity)) {
-            $this->quantity = $quantity;
-
-            return $this;
+        if ( ! is_int($quantity)) {
+            throw new \Exception('Item->quantity() expects an integer');
         }
 
-        throw new \Exception('Item->quantity() expects an integer');
+        $this->quantity = $quantity;
+
+        return $this;
     }
 
     /**
@@ -162,21 +164,12 @@ class Item
      */
     protected function setPrice($price)
     {
-        // Replace 9,99 by 9.99
         if (is_string($price)) {
-            $price = str_replace(',', '.', $price);
+            $price = $this->parseStringPrice($price);
         }
 
-        // Integers are expected to be in cents
         if (is_int($price)) {
-            // Convert it to float
-            $price = floatval($price);
-
-            // Divide in order to get the cents
-            $price = $price / 100;
-
-            // Format it to show the cents
-            $price = number_format($price, 2, '.', '');
+            $price = $this->parseIntegerPrice($price);
         }
 
         $this->price = $price;
@@ -217,21 +210,20 @@ class Item
      */
     protected function setFields($fields)
     {
-        if (is_array($fields)) {
-
-            // Set attributes or custom fields
-            foreach ($fields as $key => $value) {
-                if (property_exists($this, $key)) {
-                    $this->{$key}($value);
-                } else {
-                    $this->fields[$key] = $value;
-                }
-            }
-
-            return $this;
+        if ( ! is_array($fields)) {
+            throw new \Exception('Item->setFields() expects an array. Argument given: ' . json_encode($fields));
         }
 
-        throw new \Exception('Item->setFields() expects an array. Argument given: ' . json_encode($fields));
+        // Set attributes or custom fields
+        foreach ($fields as $key => $value) {
+            if (property_exists($this, $key)) {
+                $this->{$key}($value);
+            } else {
+                $this->fields[$key] = $value;
+            }
+        }
+
+        return $this;
     }
 
     /**

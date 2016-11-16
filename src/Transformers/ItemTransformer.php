@@ -28,6 +28,42 @@ trait ItemTransformer
         return $item;
     }
 
+    /**
+     * @param $price
+     *
+     * @return mixed
+     */
+    protected function parseStringPrice($price)
+    {
+        // Convert 9,99 to 9.99
+        return str_replace(',', '.', $price);
+    }
+
+    /**
+     * Integers are expected to be in cents
+     *
+     * @param $price
+     *
+     * @return string
+     */
+    protected function parseIntegerPrice($price)
+    {
+        // Convert it to float
+        $price = floatval($price);
+
+        // Divide in order to get the cents
+        $price = $price / 100;
+
+        // Format it to show the cents
+        return number_format($price, 2, '.', '');
+    }
+
+    /**
+     * @param Item $item
+     * @param null $currency
+     *
+     * @return Item
+     */
     protected function parsePrice(Item $item, $currency = null)
     {
         if ($currency instanceof Currency) {

@@ -55,49 +55,6 @@ class Cart
         return $this->createOrRetrieve($id);
     }
 
-    // SELF
-
-    /**
-     * @param $id
-     *
-     * @return $this
-     */
-    protected function createOrRetrieve($id)
-    {
-        // Get the Cart from the session
-        if ( ! $this->retrieveFromSession($id)) {
-            // If its not set on the session, create it with the current ID
-            var_dump('new cart');
-
-            return $this->setId($id);
-        }
-        var_dump('cart from session');
-
-        return $this;
-    }
-
-    /**
-     * @param $id
-     *
-     * @return bool
-     */
-    protected function retrieveFromSession($id)
-    {
-        $cartFromSession = $this->session->get($id);
-
-        if ($cartFromSession instanceof Cart) {
-            $properties = $this->properties();
-
-            foreach ($properties as $property) {
-                $this->{$property} = $cartFromSession->{$property};
-            }
-
-            return true;
-        }
-
-        return false;
-    }
-
     // ID
 
     /**
@@ -180,17 +137,17 @@ class Cart
             return $this->setItem($arrayOrItem);
         }
 
-        if (is_array($arrayOrItem)) {
-            foreach ($arrayOrItem as $item) {
-                if ($item instanceof Item) {
-                    $this->setItem($item);
-                }
-            }
-
-            return $this;
+        if ( ! is_array($arrayOrItem)) {
+            throw new \Exception('Value passed to Cart->add() is not an array nor an Item. Value passed: ' . json_encode($arrayOrItem));
         }
 
-        throw new \Exception('Value passed to Cart->add() is not an array nor an Item. Value passed: ' . json_encode($arrayOrItem));
+        foreach ($arrayOrItem as $item) {
+            if ($item instanceof Item) {
+                $this->setItem($item);
+            }
+        }
+
+        return $this;
     }
 
     /**
@@ -202,24 +159,26 @@ class Cart
     protected function setItem(Item $item)
     {
         // Check that there is no other item with the same ID
-        if ( ! $this->has($item)) {
-            // The item MUST have an ID
-            if (is_null($item->id()) || $item->id() === '') {
-                throw new \Exception("An item without ID can't be added to the cart. The item: " . json_encode($item));
-            }
-
-            // At least 1 quantity
-            $item = $this->atLeastOneQuantity($item);
-
-            // Price with or without currency
-            $item = $this->parsePrice($item, $this->currency);
-
-            // Add it to the Cart
-            array_push($this->items, $item);
-
-            // Append the full object to the session
-            $this->session->put($this->id, $this);
+        if ($this->has($item)) {
+            return $this;
         }
+
+        // The item MUST have an ID
+        if (is_null($item->id()) || $item->id() === '') {
+            throw new \Exception("An item without ID can't be added to the cart. The item: " . json_encode($item));
+        }
+
+        // At least 1 quantity
+        $item = $this->atLeastOneQuantity($item);
+
+        // Price with or without currency
+        $item = $this->parsePrice($item, $this->currency);
+
+        // Add it to the Cart
+        array_push($this->items, $item);
+
+        // Append the full object to the session
+        $this->session->put($this->id, $this);
 
         return $this;
     }
@@ -247,7 +206,7 @@ class Cart
      */
     public function item($id)
     {
-        return $this->getItemById($id);
+        return $this->getCartItemById($id);
     }
 
     /**
@@ -258,24 +217,26 @@ class Cart
     public function update(Item $item)
     {
         // The item MUST have an ID
-        $currentItem = $this->getItemById($item->id());
+        $currentItem = $this->getCartItemById($item->id());
 
-        if ($currentItem instanceof Item) {
-            // returns property names as an array
-            $itemProperties = $item->properties();
-
-            // Update every $currentItem property with the $item ones
-            foreach ($itemProperties as $property) {
-                $value = $item->{$property}();
-
-                if ( ! is_null($value) && $value !== '') {
-                    $currentItem->{$property}($value);
-                }
-            }
-
-            // Append the full object to the session
-            $this->session->put($this->id, $this);
+        if ( ! $currentItem instanceof Item) {
+            return $this;
         }
+
+        // returns property names as an array
+        $itemProperties = $item->properties();
+
+        // Update every $currentItem property with the $item ones
+        foreach ($itemProperties as $property) {
+            $value = $item->{$property}();
+
+            if ( ! is_null($value) && $value !== '') {
+                $currentItem->{$property}($value);
+            }
+        }
+
+        // Append the full object to the session
+        $this->session->put($this->id, $this);
 
         return $this;
     }
@@ -289,38 +250,7 @@ class Cart
      */
     public function has(Item $item)
     {
-        return ! is_bool($this->getItemById($item->id()));
-    }
-
-    /**
-     * @param $id
-     *
-     * @return bool|array
-     * @throws \Exception
-     */
-    protected function getItemById($id)
-    {
-        // Filter the items array, returning the Item object that has the id $id
-        $result = array_filter(
-            $this->items,
-            function ($current) use ($id) {
-                /** @noinspection PhpUndefinedMethodInspection */
-                return $current->id() == $id;
-            }
-        );
-
-        // if there is more than one result, something went wrong because IDs must be unique
-        if (count($result) > 1) {
-            throw new \Exception('There is more than one item with the id "' . $id . '" on the cart with id "' . $this->id . '"');
-        }
-
-        // If the item exists, the filter will return an array with one value.
-        if (isset($result[0])) {
-            return $result[0];
-        }
-
-        // If the result is an empty array, return false
-        return false;
+        return ! is_bool($this->getCartItemById($item->id()));
     }
 
 
