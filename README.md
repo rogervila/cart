@@ -1,5 +1,7 @@
 # Cart
 
+**DO NOT USE IT ON PRODUCTION BEFORE 1.0.0 IS TAGGED**
+
 [![Travis Build Status](https://travis-ci.org/rogervila/cart.svg?branch=master)](https://travis-ci.org/rogervila/cart)
 [![Code Climate](https://codeclimate.com/github/rogervila/cart/badges/gpa.svg)](https://codeclimate.com/github/rogervila/cart)
 [![Codeclimate Test Coverage](https://codeclimate.com/github/rogervila/cart/badges/coverage.svg)](https://codeclimate.com/github/rogervila/cart/coverage)
