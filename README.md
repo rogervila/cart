@@ -8,6 +8,7 @@
 [![Codeclimate Issue Count](https://codeclimate.com/github/rogervila/cart/badges/issue_count.svg)](https://codeclimate.com/github/rogervila/cart)
 [![StyleCI](https://styleci.io/repos/73286250/shield)](https://styleci.io/repos/73286250)
 [![Appveyor Build status](https://ci.appveyor.com/api/projects/status/xs0jrfxt0f1s3y0b/branch/master?svg=true)](https://ci.appveyor.com/project/roger-vila/cart/branch/master)
+[![SensioLabsInsight](https://insight.sensiolabs.com/projects/b2bd4592-eaed-4d50-bec5-aac9acded7b4/big.png)](https://insight.sensiolabs.com/projects/b2bd4592-eaed-4d50-bec5-aac9acded7b4)
 
 Cart is based on sessions, and follows the Fowler's Money pattern.
 
