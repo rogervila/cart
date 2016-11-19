@@ -45,8 +45,6 @@ trait Commons
      */
     public function properties()
     {
-        var_dump('properties for ' . get_class($this), array_keys(get_object_vars($this)));
-
         return array_keys(get_object_vars($this));
     }
 }

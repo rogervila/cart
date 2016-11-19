@@ -3,6 +3,7 @@
 namespace Cart\Transformers;
 
 use Cart\Cart;
+use Cart\Item;
 
 trait CartTransformer
 {
@@ -31,11 +32,8 @@ trait CartTransformer
         // Get the Cart from the session
         if ( ! $this->retrieveFromSession($id)) {
             // If its not set on the session, create it with the current ID
-            var_dump('new cart');
-
             return $this->setId($id);
         }
-        var_dump('cart from session');
 
         return $this;
     }
@@ -77,8 +75,7 @@ trait CartTransformer
         // Filter the items array, returning the Item object that has the id $id
         $result = array_filter(
             $this->items,
-            function ($current) use ($id) {
-                /** @noinspection PhpUndefinedMethodInspection */
+            function (Item $current) use ($id) {
                 return $current->id() == $id;
             }
         );
