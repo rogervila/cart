@@ -2,7 +2,7 @@
 
 namespace Cart\Contracts;
 
-interface SessionContract
+interface SessionContractInterface
 {
     public function put($key, $value);
 

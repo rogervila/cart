@@ -2,14 +2,14 @@
 
 namespace Cart\Tests\Resources;
 
-use Cart\Contracts\SessionContract;
+use Cart\Contracts\SessionContractInterface;
 
 /**
  * Fake Session class for CartTest->changeSessionSystem() test
  *
  * @package Cart\Tests\Resources
  */
-class Session implements SessionContract
+class Session implements SessionContractInterface
 {
     public function put($key, $value)
     {

@@ -2,13 +2,13 @@
 
 namespace Cart;
 
-use Cart\Contracts\SessionContract;
+use Cart\Contracts\SessionContractInterface;
 
 /**
  * Class Session
  * @package Cart
  */
-class Session implements SessionContract
+class Session implements SessionContractInterface
 {
     /**
      * @var string

@@ -2,7 +2,7 @@
 
 namespace Cart;
 
-use Cart\Contracts\SessionContract;
+use Cart\Contracts\SessionContractInterface;
 use Cart\Helpers\Calculator;
 use Cart\Transformers\CartTransformer;
 use Cart\Transformers\ItemTransformer;
@@ -22,7 +22,7 @@ class Cart
     const DEFAULT_ID_KEY = '_defaultCartIdKey';
 
     /**
-     * @var SessionContract
+     * @var SessionContractInterface
      */
     protected $session;
 
@@ -110,11 +110,11 @@ class Cart
     /**
      * Change the Session system
      *
-     * @param SessionContract $contract
+     * @param SessionContractInterface $contract
      *
      * @return $this
      */
-    protected function setSession(SessionContract $contract)
+    protected function setSession(SessionContractInterface $contract)
     {
         $this->session = $contract;
 
