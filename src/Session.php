@@ -21,7 +21,7 @@ class Session implements SessionContract
     public function __construct()
     {
         if ( ! $this->isStarted()) {
-            @session_start();
+            session_start();
         }
     }
 
