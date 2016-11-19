@@ -9,6 +9,12 @@ use Cart\Tests\Resources\Session;
 
 class CartTest extends \PHPUnit_Framework_TestCase
 {
+    public function setUp()
+    {
+        @session_start();
+        parent::setUp();
+    }
+
     /** @test */
     public function createCart()
     {

@@ -6,6 +6,12 @@ use Cart\Item;
 
 class ItemTest extends \PHPUnit_Framework_TestCase
 {
+    public function setUp()
+    {
+        @session_start();
+        parent::setUp();
+    }
+
     /** @test */
     public function createItem()
     {

@@ -8,6 +8,12 @@ use Money\Money;
 
 class CalculatorTest extends \PHPUnit_Framework_TestCase
 {
+    public function setUp()
+    {
+        @session_start();
+        parent::setUp();
+    }
+
     /** @test */
     public function calculateCartSubtotalWithoutCurrency()
     {
