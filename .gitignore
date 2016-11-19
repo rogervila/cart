@@ -1,6 +1,2 @@
-composer.phar
 composer.lock
-/.idea
-.DS_Store
 /vendor/
-index.php
