@@ -17,7 +17,7 @@
   "type": "library",
   "license": "MIT",
   "require": {
-    "php": "^5.5 || ^7.0",
+    "php": "^5.6 || ^7.0",
     "moneyphp/money": "^3.0",
     "php-http/guzzle6-adapter": "^1.1",
     "florianv/swap": "^3.0"
