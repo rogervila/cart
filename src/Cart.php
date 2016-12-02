@@ -16,7 +16,7 @@ use Money\Money;
  */
 class Cart
 {
-    use Commons, Calculator, CartTransformer, ItemTransformer;
+    use HasId, ReturnsProperties, Calculator, CartTransformer, ItemTransformer;
 
     // Default ID key for the Cart
     const DEFAULT_ID_KEY = '_defaultCartIdKey';
@@ -71,23 +71,6 @@ class Cart
 
         // IMPORTANT: if the ID is changed, the old row will not be deleted automatically.
         return $this;
-    }
-
-    /**
-     * @return mixed|string
-     */
-    protected function setDefaultID()
-    {
-        // If is already stored, return it
-        if ($this->session->has(self::DEFAULT_ID_KEY)) {
-            return $this->session->get(self::DEFAULT_ID_KEY);
-        }
-
-        // If not, create a new one and store it
-        $id = uniqid('_cart_');
-        $this->session->put(self::DEFAULT_ID_KEY, $id);
-
-        return $id;
     }
 
     // Session

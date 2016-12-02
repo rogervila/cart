@@ -2,15 +2,8 @@
 
 namespace Cart;
 
-/**
- * Common methods
- * @package Cart
- */
-trait Commons
+trait HasId
 {
-
-    // ID
-
     /**
      * @var string
      */
@@ -36,15 +29,5 @@ trait Commons
     protected function getId()
     {
         return $this->id;
-    }
-
-    // PROPERTIES
-
-    /**
-     * @return array
-     */
-    public function properties()
-    {
-        return array_keys(get_object_vars($this));
     }
 }

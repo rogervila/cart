@@ -10,12 +10,7 @@ use Cart\Transformers\ItemTransformer;
  */
 class Item
 {
-    use Commons, ItemTransformer;
-
-    /**
-     * @var string
-     */
-    protected $name;
+    use HasId, HasName, ReturnsProperties, ItemTransformer;
 
     /**
      * @var int
@@ -58,43 +53,6 @@ class Item
         $this->id = $id;
 
         return $this;
-    }
-
-
-    // NAME
-
-    /**
-     * @param null $value
-     *
-     * @return int
-     */
-    public function name($value = null)
-    {
-        if ( ! is_null($value)) {
-            $this->setName($value);
-        }
-
-        return $this->getName();
-    }
-
-    /**
-     * @param $name
-     *
-     * @return $this
-     */
-    protected function setName($name)
-    {
-        $this->name = $name;
-
-        return $this;
-    }
-
-    /**
-     * @return int
-     */
-    protected function getName()
-    {
-        return $this->name;
     }
 
 

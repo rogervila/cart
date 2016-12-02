@@ -15,7 +15,6 @@ class ItemTest extends \PHPUnit_Framework_TestCase
     /** @test */
     public function createItem()
     {
-
         $item = new Item('123');
 
         // Is an Item

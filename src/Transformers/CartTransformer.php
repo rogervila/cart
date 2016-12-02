@@ -3,8 +3,12 @@
 namespace Cart\Transformers;
 
 use Cart\Cart;
+use Cart\Contracts\SessionContractInterface;
 use Cart\Item;
 
+/**
+ * @property SessionContractInterface $session
+ */
 trait CartTransformer
 {
     /**
@@ -92,5 +96,22 @@ trait CartTransformer
 
         // If the result is an empty array, return false
         return false;
+    }
+
+    /**
+     * @return mixed|string
+     */
+    protected function setDefaultID()
+    {
+        // If is already stored, return it
+        if ($this->session->has(self::DEFAULT_ID_KEY)) {
+            return $this->session->get(self::DEFAULT_ID_KEY);
+        }
+
+        // If not, create a new one and store it
+        $id = uniqid('_cart_');
+        $this->session->put(self::DEFAULT_ID_KEY, $id);
+
+        return $id;
     }
 }
