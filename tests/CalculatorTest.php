@@ -10,7 +10,9 @@ class CalculatorTest extends \PHPUnit_Framework_TestCase
 {
     public function setUp()
     {
-        session_start();
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
         parent::setUp();
     }
 
