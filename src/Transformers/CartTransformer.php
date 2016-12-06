@@ -3,11 +3,10 @@
 namespace Cart\Transformers;
 
 use Cart\Cart;
-use Cart\Contracts\SessionContractInterface;
 use Cart\Item;
 
 /**
- * @property SessionContractInterface $session
+ * @property \Cart\Contracts\SessionContractInterface $session
  */
 trait CartTransformer
 {
