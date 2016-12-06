@@ -118,8 +118,8 @@ If the item does not have a quantity, it will be set to 1
 
 ```php
 $items = [
-    new Item(1),
-    new Item(2),
+    new Item('id1'),
+    new Item('id2'),
 ]
 
 $cart->add($items);
