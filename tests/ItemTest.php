@@ -53,4 +53,17 @@ class ItemTest extends \PHPUnit_Framework_TestCase
             'Cart Item properties does not return an array'
         );
     }
+
+    /** @test */
+    public function itemUpdatesItsQuantity()
+    {
+        $item = new Item(uniqid());
+        $amount = rand(1,10);
+
+        $this->assertEquals($item->quantity(), 0);
+
+        $item->quantity($amount);
+
+        $this->assertEquals($item->quantity(), $amount);
+    }
 }
