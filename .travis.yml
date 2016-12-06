@@ -10,8 +10,6 @@ cache:
     - $HOME/.composer/cache
 
 before_script:
-  - sudo apt-get update
-  - sudo apt-get -y --force-yes upgrade
   - curl -s http://getcomposer.org/installer | php
   - php -n composer.phar install --dev --verbose
 
