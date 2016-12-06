@@ -75,7 +75,7 @@ class Item
     /**
      * @param int $quantity
      *
-     * @return $this
+     * @return int
      * @throws \Exception
      */
     protected function setQuantity($quantity)
@@ -86,7 +86,7 @@ class Item
 
         $this->quantity = $quantity;
 
-        return $this;
+        return $this->quantity;
     }
 
     /**
