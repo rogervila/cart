@@ -9,16 +9,18 @@ use Money\Money;
 trait Calculator
 {
     /**
-     * @param $items
-     * @param $currency
-     *
      * @return Money
+     * @throws \Exception
      */
-    protected function calculateSubtotalWithCurrency($items, Currency $currency)
+    protected function calculateSubtotalWithCurrency()
     {
-        $result = new Money(0, $currency);
+        if ( ! $this->currency instanceof Currency) {
+            throw new \Exception('$this->currency should be instance of Money\Currency, "' . get_class($this->currency) . '" given');
+        }
 
-        foreach ($items as $item) {
+        $result = new Money(0, $this->currency);
+
+        foreach ($this->items as $item) {
             if ($item instanceof Item) {
                 $result = $result->add($item->price());
             }
@@ -28,15 +30,13 @@ trait Calculator
     }
 
     /**
-     * @param $items
-     *
      * @return float|mixed
      */
-    protected function calculateSubtotalWithoutCurrency($items)
+    protected function calculateSubtotalWithoutCurrency()
     {
         $result = 0.0;
 
-        foreach ($items as $item) {
+        foreach ($this->items as $item) {
             if ($item instanceof Item) {
                 $result += $item->price();
             }

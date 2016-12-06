@@ -62,13 +62,12 @@ trait ItemTransformer
 
     /**
      * @param Item $item
-     * @param null $currency
      *
      * @return Item
      */
-    protected function parsePrice(Item $item, $currency = null)
+    protected function parsePrice(Item $item)
     {
-        if ($currency instanceof Currency) {
+        if ($this->currency instanceof Currency) {
             return $this->priceWithCurrency($item);
         }
 

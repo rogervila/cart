@@ -155,7 +155,7 @@ class Cart
         $item = $this->atLeastOneQuantity($item);
 
         // Price with or without currency
-        $item = $this->parsePrice($item, $this->currency);
+        $item = $this->parsePrice($item);
 
         // Add it to the Cart
         array_push($this->items, $item);
@@ -276,10 +276,10 @@ class Cart
      */
     public function subtotal()
     {
-        if ( ! is_null($this->currency)) {
-            return $this->calculateSubtotalWithCurrency($this->items, $this->currency);
+        if ($this->currency instanceof Currency) {
+            return $this->calculateSubtotalWithCurrency();
         }
 
-        return $this->calculateSubtotalWithoutCurrency($this->items);
+        return $this->calculateSubtotalWithoutCurrency();
     }
 }
