@@ -21,8 +21,7 @@ trait ItemTransformer
 
         // If price is not numeric, set it to 0
         if ( ! is_numeric($price)) {
-            $price = '0';
-            $item->price($price);
+            $item->price('0');
         }
 
         return $item;
