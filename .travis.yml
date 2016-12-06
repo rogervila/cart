@@ -11,6 +11,6 @@ cache:
 
 before_script:
   - curl -s http://getcomposer.org/installer | php
-  - php composer.phar install --dev
+  - php -n composer.phar install --dev --verbose
 
 script: phpunit
