@@ -7,6 +7,9 @@ use Money\Currencies\ISOCurrencies;
 use Money\Currency;
 use Money\Parser\DecimalMoneyParser;
 
+/**
+ * @property Currency $currency
+ */
 trait ItemTransformer
 {
     /**
@@ -66,7 +69,7 @@ trait ItemTransformer
     protected function parsePrice(Item $item, $currency = null)
     {
         if ($currency instanceof Currency) {
-            return $this->priceWithCurrency($item, $this->currency);
+            return $this->priceWithCurrency($item);
         }
 
         return $this->priceWithoutCurrency($item);
@@ -74,20 +77,18 @@ trait ItemTransformer
 
     /**
      * @param Item $item
-     * @param Currency $currency
      *
      * @return Item
      */
-    protected function priceWithCurrency(Item $item, Currency $currency)
+    protected function priceWithCurrency(Item $item)
     {
         $item = $this->defaultPrice($item);
 
         // If a currency is set, convert the price into a currency value
         if ( ! is_null($this->currency)) {
             $currencies = new ISOCurrencies();
-            $parser     = new DecimalMoneyParser($currencies);
-
-            $price = $parser->parse($item->price(), $currency->getCode());
+            $parser = new DecimalMoneyParser($currencies);
+            $price = $parser->parse($item->price(), $this->currency->getCode());
 
             $item->price($price);
         }
