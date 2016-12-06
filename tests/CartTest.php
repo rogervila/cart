@@ -11,7 +11,7 @@ class CartTest extends \PHPUnit_Framework_TestCase
 {
     public function setUp()
     {
-        @session_start();
+        session_start();
         parent::setUp();
     }
 
@@ -46,7 +46,7 @@ class CartTest extends \PHPUnit_Framework_TestCase
     /** @test */
     public function createCartWithCustomId()
     {
-        $id   = uniqid();
+        $id = uniqid();
         $cart = new Cart($id);
 
         $this->assertEquals($cart->id(), $id);
@@ -56,7 +56,7 @@ class CartTest extends \PHPUnit_Framework_TestCase
     public function changeCartId()
     {
         $cart = new Cart();
-        $id   = uniqid();
+        $id = uniqid();
         $cart->id($id);
 
         $this->assertEquals($cart->id(), $id);
@@ -90,7 +90,7 @@ class CartTest extends \PHPUnit_Framework_TestCase
     public function addItem()
     {
         $cart = new Cart();
-        $id   = uniqid();
+        $id = uniqid();
         $item = new Item($id);
 
         $this->assertEquals(count($cart->items()), 0);
@@ -106,10 +106,10 @@ class CartTest extends \PHPUnit_Framework_TestCase
     /** @test */
     public function addMultipleItems()
     {
-        $cart  = new Cart();
-        $id0   = uniqid();
-        $id1   = uniqid();
-        $id2   = uniqid();
+        $cart = new Cart();
+        $id0 = uniqid();
+        $id1 = uniqid();
+        $id2 = uniqid();
         $items = [
             new Item($id0),
             new Item($id1),
@@ -133,9 +133,9 @@ class CartTest extends \PHPUnit_Framework_TestCase
     public function addItemsWithFluent()
     {
         $cart = new Cart();
-        $id0  = uniqid();
-        $id1  = uniqid();
-        $id2  = uniqid();
+        $id0 = uniqid();
+        $id1 = uniqid();
+        $id2 = uniqid();
 
         $cart->add(new Item($id0))->add(new Item($id1))->add(new Item($id2));
 
@@ -145,9 +145,9 @@ class CartTest extends \PHPUnit_Framework_TestCase
     /** @test */
     public function updateCartItem()
     {
-        $cart     = new Cart();
-        $id       = uniqid();
-        $item     = new Item($id);
+        $cart = new Cart();
+        $id = uniqid();
+        $item = new Item($id);
         $quantity = rand(1, 100);
 
         $cart->add($item);
@@ -162,12 +162,12 @@ class CartTest extends \PHPUnit_Framework_TestCase
     /** @test */
     public function updateCartItemWithAnotherItemObject()
     {
-        $cart     = new Cart();
-        $id       = uniqid();
+        $cart = new Cart();
+        $id = uniqid();
         $quantity = rand(1, 10);
 
         $cart->add(new Item($id))->update(new Item([
-            'id'       => $id,
+            'id' => $id,
             'quantity' => $quantity
         ]));
 
@@ -179,7 +179,7 @@ class CartTest extends \PHPUnit_Framework_TestCase
     public function whenAddingAnItemTwiceItGetsUpdated()
     {
         $cart = new Cart();
-        $id   = uniqid();
+        $id = uniqid();
         $item = new Item($id);
 
         $this->assertEquals(count($cart->items()), 0);
@@ -200,7 +200,7 @@ class CartTest extends \PHPUnit_Framework_TestCase
     public function getCartItem()
     {
         $cart = new Cart();
-        $id   = uniqid();
+        $id = uniqid();
         $item = new Item($id);
 
         $cart->add($item);

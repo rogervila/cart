@@ -10,7 +10,7 @@ class CalculatorTest extends \PHPUnit_Framework_TestCase
 {
     public function setUp()
     {
-        @session_start();
+        session_start();
         parent::setUp();
     }
 
@@ -21,19 +21,20 @@ class CalculatorTest extends \PHPUnit_Framework_TestCase
 
         $items = [
             new Item([
-                'id'    => uniqid(),
+                'id' => uniqid(),
                 'price' => 1000
             ]),
             new Item([
-                'id'    => uniqid(),
+                'id' => uniqid(),
                 'price' => '5,50'
             ]),
             new Item([
-                'id'    => uniqid(),
+                'id' => uniqid(),
                 'price' => '4.50'
             ])
         ];
         $expectedResult = 20.00;
+
 
         $cart->add($items);
 
@@ -48,15 +49,15 @@ class CalculatorTest extends \PHPUnit_Framework_TestCase
 
         $items = [
             new Item([
-                'id'    => uniqid(),
+                'id' => uniqid(),
                 'price' => 1000
             ]),
             new Item([
-                'id'    => uniqid(),
+                'id' => uniqid(),
                 'price' => '5,50'
             ]),
             new Item([
-                'id'    => uniqid(),
+                'id' => uniqid(),
                 'price' => '4.50'
             ])
         ];

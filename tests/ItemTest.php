@@ -8,7 +8,7 @@ class ItemTest extends \PHPUnit_Framework_TestCase
 {
     public function setUp()
     {
-        @session_start();
+        session_start();
         parent::setUp();
     }
 
@@ -37,7 +37,7 @@ class ItemTest extends \PHPUnit_Framework_TestCase
     /** @test */
     public function itemReceivesAnIdAndReturnsIt()
     {
-        $id   = uniqid();
+        $id = uniqid();
         $item = new Item($id);
 
         $this->assertEquals($item->id(), $id);
@@ -58,7 +58,7 @@ class ItemTest extends \PHPUnit_Framework_TestCase
     public function itemUpdatesItsQuantity()
     {
         $item = new Item(uniqid());
-        $amount = rand(1,10);
+        $amount = rand(1, 10);
 
         $this->assertEquals($item->quantity(), 0);
 

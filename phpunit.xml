@@ -10,6 +10,7 @@
         stopOnFailure="false"
         syntaxCheck="true"
         verbose="true"
+        stderr="true"
 >
     <testsuites>
         <testsuite name="Cart Test Suite">
