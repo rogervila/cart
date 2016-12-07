@@ -61,7 +61,7 @@ class Item
     /**
      * @param null $value
      *
-     * @return int
+     * @return mixed
      */
     public function quantity($value = null)
     {
@@ -73,9 +73,8 @@ class Item
     }
 
     /**
-     * @param int $quantity
-     *
-     * @return int
+     * @param $quantity
+     * @return $this
      * @throws \Exception
      */
     protected function setQuantity($quantity)
@@ -86,7 +85,7 @@ class Item
 
         $this->quantity = $quantity;
 
-        return $this->quantity;
+        return $this;
     }
 
     /**

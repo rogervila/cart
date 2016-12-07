@@ -17,7 +17,7 @@ trait HasName
     public function name($value = null)
     {
         if ( ! is_null($value)) {
-            $this->setName($value);
+            return $this->setName($value);
         }
 
         return $this->getName();
