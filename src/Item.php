@@ -32,8 +32,12 @@ class Item
      *
      * @param $idOrArray
      */
-    public function __construct($idOrArray)
+    public function __construct($idOrArray = null)
     {
+        if (is_null($idOrArray)) {
+            return false;
+        }
+
         if (is_array($idOrArray)) {
             return $this->setFields($idOrArray);
         }

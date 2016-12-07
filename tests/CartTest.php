@@ -210,4 +210,30 @@ class CartTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals($item, $retrievedItem);
     }
+
+    /**
+     * @test
+     * @expectedException \Exception
+     */
+    public function addCartItemsWithoutIdShouldFail()
+    {
+        $cart = new Cart();
+        $item = new Item();
+
+        $cart->add($item);
+    }
+
+    /** @test */
+    public function addItemsWithIdsAddedFluently()
+    {
+        $cart = new Cart();
+        $item = new Item();
+
+        $item->id(uniqid());
+
+        $cart->add([
+           new Item(uniqid()),
+            $item,
+        ]);
+    }
 }

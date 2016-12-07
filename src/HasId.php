@@ -17,7 +17,7 @@ trait HasId
     public function id($value = null)
     {
         if ( ! is_null($value)) {
-            $this->setId($value);
+            return $this->setId($value);
         }
 
         return $this->getId();
