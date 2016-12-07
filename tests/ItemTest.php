@@ -86,4 +86,19 @@ class ItemTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals($item->name(), $name2);
     }
+
+    /** @test */
+    public function floatPriceIsRoundedToTwoDecimals()
+    {
+        $item = new Item(uniqid());
+        $price = 10.999;
+        $item->price($price);
+
+        $this->assertEquals($item->price(), '11.00');
+
+        $price = 10.001;
+        $item->price($price);
+
+        $this->assertEquals($item->price(), '10.00');
+    }
 }

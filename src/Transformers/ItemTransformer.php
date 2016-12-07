@@ -31,7 +31,7 @@ trait ItemTransformer
     }
 
     /**
-     * @param $price
+     * @param string $price
      *
      * @return mixed
      */
@@ -42,9 +42,18 @@ trait ItemTransformer
     }
 
     /**
+     * @param float $price
+     * @return string
+     */
+    protected function parseFloatPrice($price)
+    {
+        return number_format($price, 2, '.', '');
+    }
+
+    /**
      * Integers are expected to be in cents
      *
-     * @param $price
+     * @param int $price
      *
      * @return string
      */
@@ -57,7 +66,7 @@ trait ItemTransformer
         $price = $price / 100;
 
         // Format it to show the cents
-        return number_format($price, 2, '.', '');
+        return $this->parseFloatPrice($price);
     }
 
     /**

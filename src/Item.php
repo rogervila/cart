@@ -133,6 +133,10 @@ class Item
             $price = $this->parseIntegerPrice($price);
         }
 
+        if (is_float($price)) {
+            $price = $this->parseFloatPrice($price);
+        }
+
         $this->price = $price;
 
         return $this;
