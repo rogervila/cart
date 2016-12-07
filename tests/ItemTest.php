@@ -68,4 +68,22 @@ class ItemTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals($item->quantity(), $amount);
     }
+
+    /** @test */
+    public function itemChangesItsName()
+    {
+        $name1 = uniqid();
+        $name2 = uniqid();
+
+        $item = new Item([
+            'id' => uniqid(),
+            'name' => $name1
+        ]);
+
+        $this->assertEquals($item->name(), $name1);
+
+        $item->name($name2);
+
+        $this->assertEquals($item->name(), $name2);
+    }
 }
