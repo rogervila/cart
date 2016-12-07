@@ -181,8 +181,7 @@ class CartTest extends \PHPUnit_Framework_TestCase
     public function whenAddingAnItemTwiceItGetsUpdated()
     {
         $cart = new Cart();
-        $id = uniqid();
-        $item = new Item($id);
+        $item = new Item(uniqid());
 
         $this->assertEquals(count($cart->items()), 0);
 
