@@ -58,6 +58,8 @@ class Cart
     // ID
 
     /**
+     * Overwrite trait method
+     *
      * @param null $id
      *
      * @return $this
@@ -100,6 +102,7 @@ class Cart
     protected function setSession(SessionContractInterface $contract)
     {
         $this->session = $contract;
+        $this->session->put($this->id, $this);
 
         return $this;
     }
@@ -129,6 +132,8 @@ class Cart
                 $this->setItem($item);
             }
         }
+
+        $this->session->put($this->id, $this);
 
         return $this;
     }
@@ -265,6 +270,8 @@ class Cart
         if ($currencies->contains(new Currency($currency))) {
             $this->currency = new Currency($currency);
         }
+
+        $this->session->put($this->id, $this);
 
         return $this;
     }
