@@ -85,7 +85,7 @@ class Cart
     public function session($value = null)
     {
         if ( ! is_null($value)) {
-            $this->setSession($value);
+            return $this->setSession($value);
         }
 
         return $this->session;
