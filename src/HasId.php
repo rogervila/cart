@@ -30,4 +30,16 @@ trait HasId
     {
         return $this->id;
     }
+
+    /**
+     * @param $id
+     *
+     * @return $this
+     */
+    protected function setId($id)
+    {
+        $this->id = $id;
+
+        return $this;
+    }
 }

@@ -45,20 +45,6 @@ class Item
         return $this->id = $idOrArray;
     }
 
-    // ID
-
-    /**
-     * @param $id
-     *
-     * @return $this
-     */
-    protected function setId($id)
-    {
-        $this->id = $id;
-
-        return $this;
-    }
-
 
     // QUANTITY
 
