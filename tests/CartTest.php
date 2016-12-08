@@ -59,9 +59,39 @@ class CartTest extends \PHPUnit_Framework_TestCase
     {
         $cart = new Cart();
         $id = uniqid();
+
+        $this->assertNotEquals($cart->id(), $id);
+
         $cart->id($id);
 
         $this->assertEquals($cart->id(), $id);
+    }
+
+    /** @test */
+    public function setCardCurrency()
+    {
+        $cart = new Cart();
+
+        $cart->currency('EUR');
+
+        $this->assertEquals(get_class($cart->currency()), 'Money\Currency');
+    }
+
+    /** @test */
+    public function getStoredCard()
+    {
+        $id = uniqid();
+        $currency = 'EUR';
+        $cart = new Cart($id);
+
+        $cart->currency($currency);
+
+        unset($cart);
+
+        $cart2 = new Cart($id);
+
+        $this->assertEquals(get_class($cart2->currency()), 'Money\Currency');
+        $this->assertEquals($cart2->currency(), $currency);
     }
 
     /** @test */
@@ -122,13 +152,15 @@ class CartTest extends \PHPUnit_Framework_TestCase
 
         $cart->add($items);
 
-        $this->assertEquals(count($cart->items()), 3);
+        $cartItems = $cart->items();
+
+        $this->assertEquals(count($cartItems), 3);
         /** @noinspection PhpUndefinedMethodInspection */
-        $this->assertEquals($cart->items()[0]->id(), $id0);
+        $this->assertEquals($cartItems[0]->id(), $id0);
         /** @noinspection PhpUndefinedMethodInspection */
-        $this->assertEquals($cart->items()[1]->id(), $id1);
+        $this->assertEquals($cartItems[1]->id(), $id1);
         /** @noinspection PhpUndefinedMethodInspection */
-        $this->assertEquals($cart->items()[2]->id(), $id2);
+        $this->assertEquals($cartItems[2]->id(), $id2);
     }
 
     /** @test */
@@ -231,7 +263,7 @@ class CartTest extends \PHPUnit_Framework_TestCase
         $item->id(uniqid());
 
         $cart->add([
-           new Item(uniqid()),
+            new Item(uniqid()),
             $item,
         ]);
     }
