@@ -8,6 +8,7 @@
 [![Codeclimate Issue Count](https://codeclimate.com/github/rogervila/cart/badges/issue_count.svg)](https://codeclimate.com/github/rogervila/cart)
 [![StyleCI](https://styleci.io/repos/73286250/shield)](https://styleci.io/repos/73286250)
 [![Appveyor Build status](https://ci.appveyor.com/api/projects/status/xs0jrfxt0f1s3y0b/branch/master?svg=true)](https://ci.appveyor.com/project/roger-vila/cart/branch/master)
+[![Dependency Status](https://www.versioneye.com/user/projects/584c35dadf01d500374be6d5/badge.svg?style=flat-square)](https://www.versioneye.com/user/projects/584c35dadf01d500374be6d5)
 [![SensioLabsInsight](https://insight.sensiolabs.com/projects/b2bd4592-eaed-4d50-bec5-aac9acded7b4/big.png)](https://insight.sensiolabs.com/projects/b2bd4592-eaed-4d50-bec5-aac9acded7b4)
 
 Cart is based on sessions, and follows the Fowler's Money pattern.
@@ -79,7 +80,7 @@ use Cart\Item;
 $item = new Item('mandatoryUniqueId');
 ```
 
-### add Item data
+### Add Item data
 
 Instead of passing only the ID, an array with data can be passed.
 
@@ -92,7 +93,7 @@ $item = new Item([
 ]);
 ```
 
-### add Item custom data
+### Add Item custom data
 
 In order to add custom fields, a `fields()` method is provided
 
