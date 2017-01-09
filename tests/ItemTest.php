@@ -101,4 +101,21 @@ class ItemTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals($item->price(), '10.00');
     }
+
+    /** @test */
+    public function setItemCustomFields()
+    {
+        $item = new Item();
+        $attribute = uniqid();
+        $value = uniqid();
+
+        $item->fields([
+           'id' => uniqid(),
+            $attribute => $value,
+        ]);
+
+        $this->assertEquals(1, count($item->fields()));
+        $this->assertTrue( isset($item->fields()[$attribute]) );
+        $this->assertEquals($value, $item->fields()[$attribute]);
+    }
 }
