@@ -167,11 +167,14 @@ class Item
 
         // Set attributes or custom fields
         foreach ($fields as $key => $value) {
+
             if (property_exists($this, $key)) {
                 $this->{$key}($value);
-            } else {
-                $this->fields[$key] = $value;
+
+                continue;
             }
+
+            $this->fields[$key] = $value;
         }
 
         return $this;
